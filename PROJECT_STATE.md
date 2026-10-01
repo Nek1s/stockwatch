@@ -12,17 +12,18 @@
 - Добавлены конфигурация окружения, заготовки Celery и Alembic.
 - Добавлены Docker Compose, `.env.example`, MIT-лицензия, pytest, Ruff, mypy и GitHub Actions.
 - Локально пройдены форматирование, линтер, типизация и тесты.
+- Создан GitHub Issue #1 для инициализации приложения.
 
 ## В работе
 
-- Создание удалённого репозитория `Nek1s/stockwatch`, labels и issues.
+- Подготовка pull request `feature/project-bootstrap` → `main` для Issue #1.
 
 ## Дальше
 
-1. Создать удалённый репозиторий и настроить `origin`.
-2. Создать labels и перенести backlog в GitHub Issues.
-3. Опубликовать ветку `feature/project-bootstrap` и открыть PR в `main`.
+1. Открыть PR `feature/project-bootstrap` → `main`, связанный с Issue #1.
+2. Перенести оставшийся backlog в GitHub Issues с labels.
+3. После merge начать этап пользователей и аутентификации.
 
 ## Блокеры
 
-- GitHub-плагин имеет доступ на чтение репозитория, но GitHub возвращает `403 Resource not accessible by integration` при создании Issues и PR. Для продолжения процесса через плагин нужны права записи **Issues** и **Pull requests** у подключения GitHub.
+- Нет.
