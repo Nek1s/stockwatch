@@ -6,17 +6,53 @@ StockWatch — API-сервис мониторинга цен товаров. П
 
 - регистрация и аутентификация пользователей;
 - товары, отслеживания и целевые цены;
-- фоновая проверка цен через Celery и Redis;
+- фоновые проверки цен через Celery и Redis;
 - история цен и события изменения;
 - уведомления в Telegram;
-- OpenAPI-документация FastAPI.
+- документированный REST API.
 
-## Планируемый стек
+## Технологии
 
-Python 3.13, FastAPI, Pydantic, SQLAlchemy 2.0, Alembic, PostgreSQL, Redis, Celery, Docker Compose, pytest, Ruff, mypy и GitHub Actions.
+Python 3.12+, FastAPI, Pydantic Settings, SQLAlchemy 2.0, Alembic, PostgreSQL, Redis, Celery, Docker Compose, pytest, Ruff, mypy и GitHub Actions.
 
-Подробный план — в [ROADMAP.md](ROADMAP.md), текущая стадия — в [PROJECT_STATE.md](PROJECT_STATE.md).
+## Быстрый старт
 
-## Статус
+```bash
+cp .env.example .env
+docker compose up --build
+```
 
-Проект находится на этапе инициализации.
+После запуска доступны:
+
+- API: `http://localhost:8000`;
+- liveness probe: `GET /health`;
+- OpenAPI UI: `http://localhost:8000/docs`.
+
+Для локальной разработки без Docker:
+
+```bash
+python -m venv .venv
+.venv\\Scripts\\activate
+python -m pip install -e ".[dev]"
+uvicorn app.main:app --reload
+```
+
+Проверки качества:
+
+```bash
+ruff check .
+ruff format --check .
+mypy app
+pytest
+```
+
+## Документация
+
+- [Roadmap](ROADMAP.md)
+- [Текущее состояние](PROJECT_STATE.md)
+- [Backlog issues](docs/ISSUES.md)
+- [Changelog](CHANGELOG.md)
+
+## Лицензия
+
+Проект распространяется по лицензии [MIT](LICENSE).
