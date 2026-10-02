@@ -9,3 +9,6 @@
 ### Added
 
 - Стартовая документация и roadmap проекта StockWatch.
+- Каркас FastAPI с endpoint `GET /health` и OpenAPI.
+- Конфигурация окружения, заготовки Celery и Alembic.
+- Docker Compose, CI, Ruff, mypy и pytest.
