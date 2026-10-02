@@ -1,6 +1,6 @@
 # Project State — StockWatch
 
-**Обновлено:** 2026-10-01  
+**Обновлено:** 2026-10-02  
 **Этап:** 0 — инициализация
 
 ## Сделано
@@ -13,16 +13,18 @@
 - Добавлены Docker Compose, `.env.example`, MIT-лицензия, pytest, Ruff, mypy и GitHub Actions.
 - Локально пройдены форматирование, линтер, типизация и тесты.
 - Создан GitHub Issue #1 для инициализации приложения.
+- Созданы GitHub Issues #3–#11 для оставшихся этапов MVP и портфолио-готовности.
+- PR #2 для этапа инициализации открыт; GitHub Actions CI завершился успешно.
 
 ## В работе
 
-- Подготовка pull request `feature/project-bootstrap` → `main` для Issue #1.
+- Ревью и merge PR #2 `feature/project-bootstrap` → `main` (закроет Issues #1, #3 и #4).
 
 ## Дальше
 
-1. Открыть PR `feature/project-bootstrap` → `main`, связанный с Issue #1.
-2. Перенести оставшийся backlog в GitHub Issues с labels.
-3. После merge начать этап пользователей и аутентификации.
+1. Выполнить merge PR #2 после ревью.
+2. Создать ветку `feature/user-authentication` от обновлённой `main`.
+3. Реализовать Issue #5: пользователи и JWT-аутентификация.
 
 ## Блокеры
 
