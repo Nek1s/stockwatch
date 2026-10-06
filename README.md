@@ -28,6 +28,33 @@ docker compose up --build
 - liveness probe: `GET /health`;
 - OpenAPI UI: `http://localhost:8000/docs`.
 
+Перед первым запуском API примените миграции:
+
+```bash
+docker compose exec api alembic upgrade head
+```
+
+## Аутентификация
+
+Регистрация создаёт пользователя, а вход возвращает пару access/refresh JWT. Пароль должен содержать не менее 12 символов.
+
+```bash
+curl -X POST http://localhost:8000/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"correct-horse-battery-staple"}'
+
+curl -X POST http://localhost:8000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"correct-horse-battery-staple"}'
+```
+
+Для приватного endpoint передайте access token:
+
+```bash
+curl http://localhost:8000/api/v1/auth/me \
+  -H "Authorization: Bearer <access_token>"
+```
+
 Для локальной разработки без Docker:
 
 ```bash

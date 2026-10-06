@@ -12,3 +12,5 @@
 - Каркас FastAPI с endpoint `GET /health` и OpenAPI.
 - Конфигурация окружения, заготовки Celery и Alembic.
 - Docker Compose, CI, Ruff, mypy и pytest.
+- Регистрация пользователей, вход, refresh JWT и защищённый endpoint `GET /api/v1/auth/me`.
+- Alembic-миграция для таблицы пользователей и тесты аутентификации.
