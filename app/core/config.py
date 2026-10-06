@@ -13,7 +13,10 @@ class Settings(BaseSettings):
     debug: bool = False
     database_url: str = "postgresql+psycopg://stockwatch:stockwatch@localhost:5432/stockwatch"
     redis_url: str = "redis://localhost:6379/0"
-    jwt_secret_key: str = "unsafe-development-key"
+    jwt_secret_key: str = "development-only-secret-key-must-be-at-least-32-chars"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 15
+    refresh_token_expire_days: int = 7
 
 
 @lru_cache
