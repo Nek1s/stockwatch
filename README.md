@@ -55,6 +55,26 @@ curl http://localhost:8000/api/v1/auth/me \
   -H "Authorization: Bearer <access_token>"
 ```
 
+## Отслеживания цен
+
+Создайте отслеживание товара с целевой ценой. Список поддерживает пагинацию через
+`limit` (1–100) и `offset`, а также фильтр `is_active`.
+
+```bash
+curl -X POST http://localhost:8000/api/v1/watches \
+  -H "Authorization: Bearer <access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product_name":"Mechanical keyboard",
+    "product_url":"https://shop.example.com/keyboard",
+    "target_price":"99.99",
+    "currency":"USD"
+  }'
+```
+
+Доступны `GET /api/v1/watches`, `GET/PATCH/DELETE /api/v1/watches/{watch_id}`.
+Отслеживания изолированы: пользователь не может читать или менять данные другого пользователя.
+
 Для локальной разработки без Docker:
 
 ```bash
