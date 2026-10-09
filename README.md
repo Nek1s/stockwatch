@@ -34,6 +34,12 @@ docker compose up --build
 docker compose exec api alembic upgrade head
 ```
 
+Docker Compose также запускает Celery worker и Celery Beat. Каждые пять минут Beat
+ставит в очередь активные отслеживания. Сейчас источник цен намеренно является
+безопасной заглушкой: он не обращается к закрытым или недокументированным API
+магазинов. Новый источник должен реализовать интерфейс `PriceSource` и работать
+только с согласованным публичным источником данных.
+
 ## Аутентификация
 
 Регистрация создаёт пользователя, а вход возвращает пару access/refresh JWT. Пароль должен содержать не менее 12 символов.
@@ -98,6 +104,13 @@ ruff check .
 ruff format --check .
 mypy app
 pytest
+```
+
+Для запуска фоновых процессов без Docker используйте два отдельных терминала:
+
+```bash
+celery -A app.worker:celery_app worker --loglevel=INFO
+celery -A app.worker:celery_app beat --loglevel=INFO
 ```
 
 ## Документация
