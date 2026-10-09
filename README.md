@@ -88,6 +88,28 @@ curl -X POST http://localhost:8000/api/v1/watches \
 `GET /api/v1/watches/{watch_id}/prices/statistics` и содержит последнюю,
 минимальную и максимальную цену.
 
+## Telegram-уведомления
+
+После достижения целевой цены StockWatch отправляет одно уведомление при
+пересечении порога. Повторные проверки, пока цена остаётся ниже цели, сообщения
+не дублируют. Чтобы включить доставку в self-hosted окружении:
+
+1. Добавьте токен созданного у `@BotFather` бота только в локальный `.env`:
+   `TELEGRAM_BOT_TOKEN=...`. Не передавайте его в API, чат или Git.
+2. Напишите боту `/start` и узнайте идентификатор личного чата через
+   проверенный инструмент Telegram, которому доверяете.
+3. Сохраните ID через защищённый endpoint:
+
+```bash
+curl -X PUT http://localhost:8000/api/v1/notifications/telegram \
+  -H "Authorization: Bearer <access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{"telegram_chat_id":"123456789"}'
+```
+
+Новый endpoint доступен и в OpenAPI UI. После изменения `.env` перезапустите
+`worker` и `beat`.
+
 Для локальной разработки без Docker:
 
 ```bash
