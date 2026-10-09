@@ -20,6 +20,20 @@ services:
     volumes:
       - .:/app
     depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  beat:
+    build: .
+    command: celery -A app.worker:celery_app beat --loglevel=INFO
+    env_file: .env
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
       redis:
         condition: service_healthy
 
