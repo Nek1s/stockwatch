@@ -41,12 +41,12 @@
 
 ## В работе
 
-- Issue #11: наблюдаемость и метрики.
+- Issue #11: Prometheus-метрики и Grafana dashboard.
 
 ## Дальше
 
-1. Добавить Prometheus-метрики HTTP и фоновых проверок.
-2. Добавить Grafana dashboard и инструкции локального наблюдения.
+1. Открыть PR `feature/observability` → `main` для Issue #11.
+2. После merge поднять локальный Docker Compose и открыть Grafana dashboard.
 3. Настроить Telegram в локальном окружении и выполнить ручную проверку.
 
 ## Блокеры
