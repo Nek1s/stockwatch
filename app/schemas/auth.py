@@ -28,3 +28,8 @@ class UserResponse(BaseModel):
     id: UUID
     email: EmailStr
     is_active: bool
+    telegram_chat_id: str | None
+
+
+class TelegramSettingsRequest(BaseModel):
+    telegram_chat_id: str = Field(min_length=1, max_length=32, pattern=r"^-?\d+$")

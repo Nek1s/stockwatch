@@ -108,3 +108,20 @@ def test_me_rejects_refresh_token(client: TestClient) -> None:
     )
 
     assert response.status_code == 401
+
+
+def test_user_can_configure_telegram_chat(client: TestClient) -> None:
+    register(client)
+    tokens = client.post(
+        "/api/v1/auth/login",
+        json={"email": "user@example.com", "password": "correct-horse-battery-staple"},
+    ).json()
+
+    response = client.put(
+        "/api/v1/notifications/telegram",
+        headers={"Authorization": f"Bearer {tokens['access_token']}"},
+        json={"telegram_chat_id": "123456789"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["telegram_chat_id"] == "123456789"

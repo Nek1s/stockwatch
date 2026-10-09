@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from app.db.base import Base
+from app.models.notification import NotificationEvent
 from app.models.price_snapshot import PriceSnapshot
 from app.models.product import Product
 from app.models.user import User
@@ -24,6 +25,14 @@ class FixedPriceSource:
 class FailingPriceSource:
     def fetch_price(self, url: str) -> PriceResult:
         raise TemporaryPriceSourceError("temporary failure")
+
+
+class RecordingNotifier:
+    def __init__(self) -> None:
+        self.messages: list[tuple[str, str, str, str]] = []
+
+    def send_price_alert(self, chat_id: str, product_name: str, price: str, currency: str) -> None:
+        self.messages.append((chat_id, product_name, price, currency))
 
 
 def test_worker_persists_price_snapshot() -> None:
@@ -85,6 +94,39 @@ def test_worker_propagates_temporary_source_error() -> None:
 
     with pytest.raises(TemporaryPriceSourceError):
         process_watch_price(watch.id, session, FailingPriceSource())
+
+
+def test_worker_notifies_once_while_price_stays_below_target() -> None:
+    engine = create_engine(
+        "sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool
+    )
+    Base.metadata.create_all(engine)
+    session: Session = sessionmaker(bind=engine)()
+    user = User(
+        id=uuid4(),
+        email="alerts@example.com",
+        password_hash="hash",
+        telegram_chat_id="123456789",
+    )
+    product = Product(
+        id=uuid4(), user_id=user.id, name="Product", url="https://example.com/product"
+    )
+    watch = PriceWatch(
+        id=uuid4(),
+        user_id=user.id,
+        product_id=product.id,
+        target_price=Decimal("130"),
+        currency="RUB",
+    )
+    session.add_all([user, product, watch])
+    session.commit()
+    notifier = RecordingNotifier()
+
+    process_watch_price(watch.id, session, FixedPriceSource(), notifier)
+    process_watch_price(watch.id, session, FixedPriceSource(), notifier)
+
+    assert notifier.messages == [("123456789", "Product", "123.45", "RUB")]
+    assert session.scalar(select(NotificationEvent).where(NotificationEvent.watch_id == watch.id))
 
 
 def test_scheduler_enqueues_only_active_watches(monkeypatch: pytest.MonkeyPatch) -> None:
