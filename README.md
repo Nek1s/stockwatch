@@ -140,6 +140,9 @@ celery -A app.worker:celery_app beat --loglevel=INFO
 - [Roadmap](ROADMAP.md)
 - [Текущее состояние](PROJECT_STATE.md)
 - [Backlog issues](docs/ISSUES.md)
+- [Архитектура](docs/ARCHITECTURE.md)
+- [Примеры API](docs/API_EXAMPLES.md)
+- [ADR 001: источники цен](docs/ADR/001-approved-price-sources.md)
 - [Changelog](CHANGELOG.md)
 
 ## Лицензия
