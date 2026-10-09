@@ -1,4 +1,5 @@
 from decimal import Decimal
+from time import perf_counter
 from typing import Any
 from uuid import UUID
 
@@ -13,6 +14,7 @@ from app.models.price_snapshot import PriceSnapshot
 from app.models.product import Product
 from app.models.user import User
 from app.models.watch import PriceWatch
+from app.observability.metrics import PRICE_CHECK_DURATION, PRICE_CHECKS, PRICE_SNAPSHOTS
 from app.services.notifier import Notifier, TelegramNotifier, TemporaryNotificationError
 from app.services.price_source import PriceSource, TemporaryPriceSourceError, UnsupportedPriceSource
 
@@ -40,11 +42,22 @@ celery_app.conf.update(
 )
 def check_watch_price(self: Any, watch_id: str) -> None:
     """Fetch one approved source and persist an immutable price snapshot."""
-    with SessionLocal() as session:
-        notifier = (
-            TelegramNotifier(settings.telegram_bot_token) if settings.telegram_bot_token else None
-        )
-        process_watch_price(UUID(watch_id), session, UnsupportedPriceSource(), notifier)
+    started_at = perf_counter()
+    outcome = "success"
+    try:
+        with SessionLocal() as session:
+            notifier = (
+                TelegramNotifier(settings.telegram_bot_token)
+                if settings.telegram_bot_token
+                else None
+            )
+            process_watch_price(UUID(watch_id), session, UnsupportedPriceSource(), notifier)
+    except Exception:
+        outcome = "error"
+        raise
+    finally:
+        PRICE_CHECKS.labels(outcome=outcome).inc()
+        PRICE_CHECK_DURATION.observe(perf_counter() - started_at)
 
 
 @celery_app.task  # type: ignore[untyped-decorator]
@@ -93,6 +106,7 @@ def process_watch_price(
         )
         session.add(NotificationEvent(watch_id=watch.id, price_snapshot_id=snapshot.id))
     session.commit()
+    PRICE_SNAPSHOTS.inc()
 
 
 def _should_notify(
