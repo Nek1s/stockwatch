@@ -75,6 +75,13 @@ curl -X POST http://localhost:8000/api/v1/watches \
 Доступны `GET /api/v1/watches`, `GET/PATCH/DELETE /api/v1/watches/{watch_id}`.
 Отслеживания изолированы: пользователь не может читать или менять данные другого пользователя.
 
+## История цен
+
+История снимков отслеживания доступна владельцу через
+`GET /api/v1/watches/{watch_id}/prices`. Базовая статистика доступна по
+`GET /api/v1/watches/{watch_id}/prices/statistics` и содержит последнюю,
+минимальную и максимальную цену.
+
 Для локальной разработки без Docker:
 
 ```bash
