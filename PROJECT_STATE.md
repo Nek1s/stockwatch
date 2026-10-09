@@ -1,7 +1,7 @@
 # Project State — StockWatch
 
 **Обновлено:** 2026-10-09
-**Этап:** 5 — портфолио-готовность (в работе)
+**Этап:** MVP готов
 
 ## Сделано
 
@@ -38,16 +38,19 @@
 - Добавлены архитектурная схема, ADR по источникам цен и примеры API-запросов.
 - PR #18 влит в `main`; Issue #10 закрыт; CI завершился успешно.
 - Ветка `feature/architecture-docs` удалена локально и на GitHub после merge.
+- Добавлены Prometheus-метрики HTTP и worker, локальные Prometheus/Grafana и dashboard.
+- PR #19 влит в `main`; Issue #11 закрыт; CI завершился успешно.
+- Ветка `feature/observability` удалена локально и на GitHub после merge.
 
 ## В работе
 
-- Issue #11: Prometheus-метрики и Grafana dashboard.
+- Нет. Базовый MVP и портфолио-документация готовы.
 
 ## Дальше
 
-1. Открыть PR `feature/observability` → `main` для Issue #11.
-2. После merge поднять локальный Docker Compose и открыть Grafana dashboard.
-3. Настроить Telegram в локальном окружении и выполнить ручную проверку.
+1. Поднять Docker Compose на машине с Docker и вручную проверить Grafana/Telegram.
+2. Выбрать согласованный публичный источник цен для первой реальной интеграции.
+3. По запросу подготовить GitHub-профиль и репозиторий к публичному показу.
 
 ## Блокеры
 
