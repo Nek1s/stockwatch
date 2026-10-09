@@ -143,6 +143,7 @@ celery -A app.worker:celery_app beat --loglevel=INFO
 - [Архитектура](docs/ARCHITECTURE.md)
 - [Примеры API](docs/API_EXAMPLES.md)
 - [ADR 001: источники цен](docs/ADR/001-approved-price-sources.md)
+- [Наблюдаемость](docs/OBSERVABILITY.md)
 - [Changelog](CHANGELOG.md)
 
 ## Лицензия
