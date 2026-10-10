@@ -41,16 +41,19 @@
 - Добавлены Prometheus-метрики HTTP и worker, локальные Prometheus/Grafana и dashboard.
 - PR #19 влит в `main`; Issue #11 закрыт; CI завершился успешно.
 - Ветка `feature/observability` удалена локально и на GitHub после merge.
+- Добавлены CI badge и checklist перед первым публичным релизом.
+- PR #21 влит в `main`; Issue #20 закрыт; CI завершился успешно.
+- Ветка `feature/release-checklist` удалена локально и на GitHub после merge.
 
 ## В работе
 
-- Issue #20: release checklist и CI badge.
+- Нет. MVP готов к ручной инфраструктурной проверке и публичному показу.
 
 ## Дальше
 
-1. Открыть PR `feature/release-checklist` → `main` для Issue #20.
-2. Поднять Docker Compose на машине с Docker и вручную проверить Grafana/Telegram.
-3. Выбрать согласованный публичный источник цен для первой реальной интеграции.
+1. Поднять Docker Compose на машине с Docker и вручную проверить Grafana/Telegram.
+2. Выбрать согласованный публичный источник цен для первой реальной интеграции.
+3. По запросу подготовить GitHub-профиль и репозиторий к публичному показу.
 
 ## Блокеры
 
