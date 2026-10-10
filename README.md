@@ -1,5 +1,7 @@
 # StockWatch
 
+[![CI](https://github.com/Nek1s/stockwatch/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Nek1s/stockwatch/actions/workflows/ci.yml)
+
 StockWatch — API-сервис мониторинга цен товаров. Пользователь добавляет товар и целевую цену, а сервис регулярно проверяет цену, сохраняет историю и уведомляет о снижении.
 
 ## MVP
@@ -144,6 +146,7 @@ celery -A app.worker:celery_app beat --loglevel=INFO
 - [Примеры API](docs/API_EXAMPLES.md)
 - [ADR 001: источники цен](docs/ADR/001-approved-price-sources.md)
 - [Наблюдаемость](docs/OBSERVABILITY.md)
+- [Release checklist](docs/RELEASE_CHECKLIST.md)
 - [Changelog](CHANGELOG.md)
 
 ## Лицензия
