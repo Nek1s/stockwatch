@@ -6,6 +6,11 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- `email-validator` перенесён в runtime-зависимости, чтобы Docker-образ API мог
+  загружать Pydantic-схемы с `EmailStr`.
+
 ### Added
 
 - Стартовая документация и roadmap проекта StockWatch.
