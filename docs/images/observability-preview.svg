@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">StockWatch observability preview</title>
+  <desc id="desc">A stylized Grafana-like dashboard preview with StockWatch metrics.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111827"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22c55e"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect x="0" y="0" width="78" height="720" fill="#0b1220"/>
+  <circle cx="39" cy="48" r="17" fill="#f97316"/><path d="M27 48h24M39 36v24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <rect x="26" y="111" width="26" height="26" rx="6" fill="#334155"/><rect x="26" y="165" width="26" height="26" rx="6" fill="#334155"/><rect x="26" y="219" width="26" height="26" rx="6" fill="#334155"/>
+  <text x="116" y="68" fill="white" font-family="Arial, sans-serif" font-size="29" font-weight="700">StockWatch Overview</text>
+  <text x="116" y="98" fill="#94a3b8" font-family="Arial, sans-serif" font-size="16">Prometheus • Grafana • live service telemetry</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="116" y="135" width="495" height="222" rx="12" fill="#172033" stroke="#334155"/>
+    <text x="142" y="171" fill="#f8fafc" font-size="18" font-weight="700">HTTP requests per second</text>
+    <text x="142" y="198" fill="#94a3b8" font-size="14">rate(stockwatch_http_requests_total[5m])</text>
+    <g stroke="#334155" stroke-width="1"><path d="M142 244h440M142 284h440M142 324h440"/></g>
+    <path d="M143 315 C190 304 204 322 240 281 S298 310 333 257 S395 296 428 245 S505 276 580 213" fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round"/>
+    <rect x="637" y="135" width="447" height="222" rx="12" fill="#172033" stroke="#334155"/>
+    <text x="663" y="171" fill="#f8fafc" font-size="18" font-weight="700">Price checks per second</text>
+    <text x="663" y="198" fill="#94a3b8" font-size="14">worker success / error outcomes</text>
+    <g stroke="#334155" stroke-width="1"><path d="M663 244h392M663 284h392M663 324h392"/></g>
+    <path d="M663 310 L714 288 L758 300 L801 242 L847 265 L894 218 L943 245 L991 195 L1054 206" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="116" y="383" width="968" height="222" rx="12" fill="#172033" stroke="#334155"/>
+    <text x="142" y="419" fill="#f8fafc" font-size="18" font-weight="700">HTTP latency p95</text>
+    <text x="142" y="446" fill="#94a3b8" font-size="14">histogram_quantile(0.95, request duration)</text>
+    <g stroke="#334155" stroke-width="1"><path d="M142 492h913M142 532h913M142 572h913"/></g>
+    <path d="M143 560 C214 520 261 547 327 514 S440 544 522 501 S665 548 742 485 S868 523 942 474 S1014 515 1054 460" fill="none" stroke="#60a5fa" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect x="936" y="37" width="148" height="35" rx="7" fill="#334155"/><text x="959" y="60" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14">Last 5 minutes</text>
+  <text x="116" y="665" fill="#94a3b8" font-family="Arial, sans-serif" font-size="16">/metrics • Prometheus scrape • Docker Compose</text>
+</svg>
