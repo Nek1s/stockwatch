@@ -4,6 +4,16 @@
 
 StockWatch — API-сервис мониторинга цен товаров. Пользователь добавляет товар и целевую цену, а сервис регулярно проверяет цену, сохраняет историю и уведомляет о снижении.
 
+## Интерфейсы
+
+<p align="center">
+  <img src="docs/images/openapi-preview.svg" width="49%" alt="Превью OpenAPI StockWatch" />
+  <img src="docs/images/observability-preview.svg" width="49%" alt="Превью dashboard наблюдаемости StockWatch" />
+</p>
+
+Демонстрационные превью отражают реальный Swagger UI (`/docs`) и dashboard
+`StockWatch Overview` в Grafana. Они не содержат данных пользователей или секретов.
+
 ## MVP
 
 - регистрация и аутентификация пользователей;
